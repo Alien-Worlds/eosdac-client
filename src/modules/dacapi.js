@@ -153,7 +153,7 @@ export class DacApi {
     let scope
     let table = ''
     if (payload === 'custodian') {
-      table = 'config2'
+      table = 'config'
       contract = this.dir.getAccount(this.dir.ACCOUNT_CUSTODIAN)
       scope = this.dir.dacId
     } else if (payload === 'wp') {
@@ -291,7 +291,7 @@ export class DacApi {
       json: true,
       code: this.dir.getAccount(this.dir.ACCOUNT_CUSTODIAN),
       scope: this.dir.dacId,
-      table: 'pendingpay2',
+      table: 'pendingpay',
       lower_bound: accountname,
       upper_bound: accountname,
       index_position: 2,
