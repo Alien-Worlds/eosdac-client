@@ -73,7 +73,7 @@ class ConfigLoader {
       case 'paycpu':
         return !!this.configFile.pay_cpu
       default:
-        return `***${configquery} not yet subscribed in config-loader***`
+        throw Error(`***${configquery} not yet subscribed in config-loader***`)
     }
   }
 
@@ -84,8 +84,6 @@ class ConfigLoader {
 
 export default ({ Vue, store }) => {
   let config = new ConfigLoader()
-  store.commit('global/setNode', config.get('defaultnode'))
-
   const endpoints = config.get('endpoints')
   const u = new URL(endpoints[0])
   const protocol = u.protocol.substring(0, u.protocol.indexOf(':'))
