@@ -546,7 +546,7 @@ export default {
         ]
       }
       // this.tokenConfig.enabled = !!this.tokenConfig.enabled
-      action.data = { config: this.tokenConfig, token_symbol: this.$dir.symbol.symbol }
+      action.data = { config: this.tokenConfig, token_symbol: this.$dir.symbol.sym }
 
       const res = await this.$store.dispatch('user/proposeMsig', {
         actions: [action],
