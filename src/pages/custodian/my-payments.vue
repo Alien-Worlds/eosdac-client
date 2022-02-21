@@ -217,7 +217,7 @@ export default {
       const actions = [
         {
           account: this.$dir.getAccount(this.$dir.ACCOUNT_CUSTODIAN),
-          name: 'updatereqpae',
+          name: 'updatereqpay',
           data: {
             cand: this.getAccountName,
             requestedpay: this.newRequestedPay.quantity,
