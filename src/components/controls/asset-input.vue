@@ -91,7 +91,7 @@ export default {
       if (isNaN(quantity)) {
         quantity = 0
       }
-      quantity = `${quantity.toFixed(symbol.precision)} ${symbol.symbol}`
+      quantity = `${quantity.toFixed(symbol.precision)} ${symbol.sym}`
 
       const value = { quantity, contract: symbol.contract }
       this.$emit('input', value)
