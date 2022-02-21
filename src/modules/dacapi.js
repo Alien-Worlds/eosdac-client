@@ -110,7 +110,7 @@ export class DacApi {
   }
 
   async getTokenStats () {
-    const [, sym] = this.dir.symbol.symbol.split(',')
+    const [, sym] = this.dir.symbol.sym.split(',')
     let res = await this.eos.get_table_rows({
       json: true,
       code: this.dir.symbol.contract,

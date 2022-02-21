@@ -90,7 +90,7 @@ export default {
     SecondsInput
   },
   data () {
-    const [dacPrecision, dacSym] = this.$dir.symbol.symbol.split(',')
+    const [dacPrecision, dacSym] = this.$dir.symbol.sym.split(',')
 
     return {
       allowed_currencies: [

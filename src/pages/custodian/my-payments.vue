@@ -93,7 +93,7 @@ export default {
     AssetInput
   },
   data () {
-    const [precisionStr, symbol] = this.$dir.symbol.symbol.split(',')
+    const [precisionStr, symbol] = this.$dir.symbol.sym.split(',')
     const precision = parseInt(precisionStr)
 
     return {

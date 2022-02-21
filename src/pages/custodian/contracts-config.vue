@@ -323,7 +323,7 @@ export default {
     SecondsInput
   },
   data () {
-    const [precisionStr, symbol] = this.$dir.symbol.symbol.split(',')
+    const [precisionStr, symbol] = this.$dir.symbol.sym.split(',')
     const precision = parseInt(precisionStr)
     const contract = this.$dir.symbol.contract
 

@@ -62,12 +62,12 @@ class DacDirectory {
   }
 
   get symbolCode () {
-    const [, code] = this.dacData.symbol.symbol.split(',')
+    const [, code] = this.dacData.symbol.sym.split(',')
     return code
   }
 
   get symbolPrecision () {
-    const [precisionStr] = this.dacData.symbol.symbol.split(',')
+    const [precisionStr] = this.dacData.symbol.sym.split(',')
     return parseInt(precisionStr)
   }
 

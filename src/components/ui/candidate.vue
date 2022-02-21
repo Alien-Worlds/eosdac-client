@@ -165,7 +165,7 @@ export default {
   },
   methods: {
     dacSymbolPrecision () {
-      const [precision] = this.$dir.symbol.symbol.split(',')
+      const [precision] = this.$dir.symbol.sym.split(',')
       return parseInt(precision)
     }
   },
