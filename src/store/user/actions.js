@@ -316,13 +316,12 @@ export async function proposeMsig (
     expiration: payload.expiration || expiration,
     ref_block_num: 0,
     ref_block_prefix: 0,
-    max_net_usage_words: 0,
+    max_net_usage_words: '0',
     max_cpu_usage_ms: 0,
-    delay_sec: payload.delay_sec || 0,
+    delay_sec: payload.delay_sec || '0',
     actions: [],
     context_free_actions: [],
     transaction_extensions: [],
-    signatures: [],
     context_free_data: []
   }
 
@@ -342,34 +341,22 @@ export async function proposeMsig (
       proposer: state.accountName,
       proposal_name: proposalName,
       requested: payload.requested || requested,
+      dac_id: this._vm.$configFile.get('dacid'),
+      metadata: [
+        {
+          key: 'title',
+          value: payload.title || `Execute ${payload.actions.length} action(s) ${payload.actions[0].account}:${payload.actions[0].name}`
+        },
+        {
+          key: 'description',
+          value: payload.description || ''
+        }
+      ],
       trx: msigTrxTemplate
     }
   }
-  // handle the correct permission for the "proposed" action
-  let PERM = rootGetters['dac/getAuthAccountPermLevel']
-
-  const authAccount = this._vm.$dir.getAccount(this._vm.$dir.ACCOUNT_AUTH)
-  const dacMsigContract = this._vm.$dir.getAccount(this._vm.$dir.ACCOUNT_MSIGS)
-
-  let proposed = {
-    account: dacMsigContract,
-    name: 'proposede',
-    authorization: [
-      { actor: state.accountName, permission: getters['getAuth'] },
-      { actor: authAccount, permission: PERM }
-    ],
-    data: {
-      proposer: state.accountName,
-      proposal_name: proposalName,
-      dac_id: this._vm.$dir.dacId,
-      metadata: JSON.stringify({
-        title: payload.title || `Execute ${payload.actions.length} action(s) ${payload.actions[0].account}:${payload.actions[0].name}`,
-        description: payload.description || ''
-      })
-    }
-  }
-
-  let msigActions = [propose, proposed]
+  let msigActions = [propose]
+  console.info(`proposing msig actions: ${JSON.stringify(msigActions)}`)
   let res = await dispatch('transact', { actions: msigActions })
   if (res) {
     res.proposal_name = proposalName

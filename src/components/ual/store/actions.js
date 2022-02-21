@@ -101,14 +101,16 @@ export async function transact ({ state, dispatch, commit }, payload) {
     return action
   })
   let res = null
+  console.info(`copiedActions: ${JSON.stringify(copiedActions, null, 2)}`)
   try {
-    res = await user.signTransaction({ actions: copiedActions }, { broadcast: true })
+    res = await user.signTransaction({ actions: copiedActions }, { expireSeconds: 120, blocksBehind: 3 })
     // afterTransact()
   } catch (e) {
     const [errMsg, errCode] = parseUalError(e)
     throw new Error(errMsg, errCode)
+  } finally {
+    await commit('setSigningOverlay', { show: false, status: 0 })
   }
-  await commit('setSigningOverlay', { show: false, status: 0 })
 
   return res
 }

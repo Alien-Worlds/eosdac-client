@@ -67,15 +67,19 @@ export default {
   },
   methods: {
     updateValueQuantity (val) {
-      let symbolOpt = this.$refs.symbol_input.value
       let symbol
-      if (typeof symbolOpt === 'string') {
-        symbolOpt = this.$refs.symbol_input.options.filter(o => o.label === this.$refs.symbol_input.value)[0]
+
+      if (this.$refs.symbol_input) {
+        let symbolOpt = this.$refs.symbol_input.value
+        if (typeof symbolOpt === 'string') {
+          symbolOpt = this.$refs.symbol_input.options.filter(o => o.label === this.$refs.symbol_input.value)[0]
+        }
+        symbol = symbolOpt.value
+      } else {
+        symbol = this.internalValue
       }
-      symbol = symbolOpt.value
-
+      console.log(`updateValueQuantity symbol: ${JSON.stringify(symbol)}`)
       let quantity = parseFloat(val)
-
       this.updateValue(quantity, symbol)
     },
     updateValueAsset (val) {
@@ -91,7 +95,7 @@ export default {
       if (isNaN(quantity)) {
         quantity = 0
       }
-      quantity = `${quantity.toFixed(symbol.precision)} ${symbol.sym}`
+      quantity = `${quantity.toFixed(symbol.precision)} ${symbol.symbol}`
 
       const value = { quantity, contract: symbol.contract }
       this.$emit('input', value)
@@ -101,7 +105,10 @@ export default {
         val = JSON.parse(JSON.stringify(val))
         // console.log('parse', val)
         const contract = val.contract
-        const [quantity, symbol] = val.quantity.split(' ')
+        let [quantity, symbol] = val.quantity.split(' ')
+        if (!quantity) {
+          quantity = 'EOS'
+        }
         const [, decimals] = quantity.split('.')
         const precision = decimals ? decimals.length : 0
         // console.log({ contract, quantity, symbol, precision })

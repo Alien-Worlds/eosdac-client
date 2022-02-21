@@ -163,18 +163,6 @@
                         :label="$t('proposal.unapprove')"
                         @click="unapproveProposal(msig.proposer, msig.proposal_name)"
                 />
-                <!--<q-btn
-                        v-if="!isDenied"
-                        color="negative"
-                        :label="$t('proposal.deny')"
-                        @click="denyProposal(msig.proposer, msig.proposal_name)"
-                />
-                <q-btn
-                        v-if="isDenied"
-                        color="negative"
-                        :label="$t('proposal.undeny')"
-                        @click="undenyProposal(msig.proposer, msig.proposal_name)"
-                />-->
                 <q-btn
                         v-if="isCreator"
                         color="negative"
@@ -299,7 +287,6 @@ export default {
   data () {
     return {
       systemmsig: this.$configFile.get('systemmsigcontract'),
-      dacmsig: this.$dir.getAccount(this.$dir.ACCOUNT_MSIGS),
 
       isHidden: false,
       approvals_modal: false,
@@ -441,23 +428,6 @@ export default {
             proposal_name: proposalName,
             level: { actor: this.getAccountName, permission: this.getAuth }
           }
-        },
-        {
-          account: this.dacmsig,
-          name: 'approvede',
-          authorization: [
-            { actor: this.getAccountName, permission: this.getAuth },
-            {
-              actor: authAccount,
-              permission: 'one'
-            }
-          ],
-          data: {
-            proposer: proposer,
-            proposal_name: proposalName,
-            approver: this.getAccountName,
-            dac_id: this.$dir.dacId
-          }
         }
       ]
       if (this.$configFile.get('paycpu')) {
@@ -487,7 +457,6 @@ export default {
 
     // unapprove a proposal via msig relay {"proposer":0,"proposal_name":0,"level":0}
     async unapproveProposal (proposer, proposalName) {
-      const authAccount = this.$dir.getAccount(this.$dir.ACCOUNT_AUTH)
       let actions = [
         {
           account: this.systemmsig,
@@ -496,23 +465,6 @@ export default {
             proposer: proposer,
             proposal_name: proposalName,
             level: { actor: this.getAccountName, permission: this.getAuth }
-          }
-        },
-        {
-          account: this.dacmsig,
-          name: 'unapprovede',
-          authorization: [
-            { actor: this.getAccountName, permission: this.getAuth },
-            {
-              actor: authAccount,
-              permission: 'one'
-            }
-          ],
-          data: {
-            proposer: proposer,
-            proposal_name: proposalName,
-            unapprover: this.getAccountName,
-            dac_id: this.$dir.dacId
           }
         }
       ]
@@ -523,67 +475,8 @@ export default {
         this.transactionCallback('e_unapproval')
       }
     },
-    // deny a proposal, just marks as an action
-    async denyProposal (proposer, proposalName) {
-      const authAccount = this.$dir.getAccount(this.$dir.ACCOUNT_AUTH)
-      let actions = [
-        {
-          account: this.dacmsig,
-          name: 'deny',
-          authorization: [
-            { actor: this.getAccountName, permission: this.getAuth },
-            {
-              actor: authAccount,
-              permission: 'one'
-            }
-          ],
-          data: {
-            proposer: proposer,
-            proposal_name: proposalName,
-            denier: this.getAccountName,
-            dac_id: this.$dir.dacId
-          }
-        }
-      ]
-      let result = await this.$store.dispatch('user/transact', {
-        actions: actions
-      })
-      if (result) {
-        this.transactionCallback('e_deny')
-      }
-    },
-    // undeny a proposal, just marks as an action
-    async undenyProposal (proposer, proposalName) {
-      const authAccount = this.$dir.getAccount(this.$dir.ACCOUNT_AUTH)
-      let actions = [
-        {
-          account: this.dacmsig,
-          name: 'undeny',
-          authorization: [
-            { actor: this.getAccountName, permission: this.getAuth },
-            {
-              actor: authAccount,
-              permission: 'one'
-            }
-          ],
-          data: {
-            proposer: proposer,
-            proposal_name: proposalName,
-            undenier: this.getAccountName,
-            dac_id: this.$dir.dacId
-          }
-        }
-      ]
-      let result = await this.$store.dispatch('user/transact', {
-        actions: actions
-      })
-      if (result) {
-        this.transactionCallback('e_deny')
-      }
-    },
     // execute a proposal via msig relay {"proposer":0,"proposal_name":0,"executer":0}
     async executeProposal (proposer, proposalName) {
-      const authAccount = this.$dir.getAccount(this.$dir.ACCOUNT_AUTH)
       let actions = [
         {
           account: this.systemmsig,
@@ -592,23 +485,6 @@ export default {
             proposer: proposer,
             proposal_name: proposalName,
             executer: this.getAccountName
-          }
-        },
-        {
-          account: this.dacmsig,
-          name: 'executede',
-          authorization: [
-            { actor: this.getAccountName, permission: this.getAuth },
-            {
-              actor: authAccount,
-              permission: 'one'
-            }
-          ],
-          data: {
-            proposer: proposer,
-            proposal_name: proposalName,
-            executer: this.getAccountName,
-            dac_id: this.$dir.dacId
           }
         }
       ]
@@ -622,7 +498,6 @@ export default {
 
     // cancel a proposal via msig relay {"proposer":0,"proposal_name":0,"canceler":0}
     async cancelProposal (proposer, proposalName) {
-      const authAccount = this.$dir.getAccount(this.$dir.ACCOUNT_AUTH)
       let actions = [
         {
           account: this.systemmsig,
@@ -631,23 +506,6 @@ export default {
             proposer: proposer,
             proposal_name: proposalName,
             canceler: this.getAccountName
-          }
-        },
-        {
-          account: this.dacmsig,
-          name: 'cancellede',
-          authorization: [
-            { actor: this.getAccountName, permission: this.getAuth },
-            {
-              actor: authAccount,
-              permission: this.getAuthAccountPermLevel // can be one or admin depending of the logged in user
-            }
-          ],
-          data: {
-            proposer: proposer,
-            proposal_name: proposalName,
-            canceler: this.getAccountName,
-            dac_id: this.$dir.dacId
           }
         }
       ]

@@ -481,6 +481,7 @@ export default {
       this.custodianConfig.should_pay_via_service_provider = !!this.custodianConfig.should_pay_via_service_provider
       action.data = { newconfig: this.custodianConfig, dac_id: this.$dir.dacId }
 
+      console.info(`saveCustodianConfig action: ${JSON.stringify(action)}`)
       const res = await this.$store.dispatch('user/proposeMsig', {
         actions: [action],
         title: this.msigTitle,
