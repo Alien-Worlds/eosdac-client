@@ -32,7 +32,6 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
-/src/extensions/
 /src/statics/app-logo-128x128.png
 /src/statics/icons/apple-icon-120x120.png
 /src/statics/icons/apple-icon-152x152.png
