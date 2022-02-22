@@ -1,4 +1,7 @@
-export async function initRoutine ({ state, commit, dispatch }, vm) {
+import { candidatesMockdata } from '../../statics/mockdata/candidates.json'
+import { custodiansMockdata } from '../../statics/mockdata/custodians.json'
+
+export async function initRoutine({ state, commit, dispatch }, vm) {
   commit('setIsLoaded', false)
   const api = await dispatch('global/getDacApi', false, { root: true })
 
@@ -24,56 +27,70 @@ export async function initRoutine ({ state, commit, dispatch }, vm) {
 
 /// //////////////////////////////////////////////////////////////////////////////////////////////
 
-export async function fetchCustodians ({ state, commit, dispatch }) {
-  const api = await dispatch('global/getDacApi', false, { root: true })
+export async function fetchCustodians({ state, commit, dispatch }) {
+  // const api = await dispatch('global/getDacApi', false, { root: true })
 
-  const custodians = await api.getCustodians()
-  console.log('custodians', custodians)
-  if (custodians) {
-    commit('setCustodians', custodians)
-    return custodians
-  } else {
-    return []
-  }
+  // const custodians = await api.getCustodians()
+  // console.log('custodians', custodians)
+  // if (custodians) {
+  //   commit('setCustodians', custodians)
+  //   return custodians
+  // } else {
+  //   return []
+  // }
+
+  // return custodians
+
+  // mockdata
+  return custodiansMockdata
 }
 
-export async function fetchActiveCandidates ({ state, commit, dispatch }) {
-  const api = await dispatch('global/getDacApi', false, { root: true })
+export async function fetchActiveCandidates({ state, commit, dispatch }) {
+  // const api = await dispatch('global/getDacApi', false, { root: true })
 
-  let candidates = await api.getCandidates()
+  // let candidates = await api.getCandidates()
 
-  if (candidates) {
-    candidates = candidates.filter(c => c.is_active)
-  } else {
-    return []
-  }
+  // if (candidates) {
+  //   candidates = candidates.filter(c => c.is_active)
+  // } else {
+  //   return []
+  // }
 
-  candidates.sort((a, b) => {
-    return b.total_votes - a.total_votes
-  })
+  // candidates.sort((a, b) => {
+  //   return b.total_votes - a.total_votes
+  // })
 
-  candidates = candidates.map((c, i) => {
+  // candidates = candidates.map((c, i) => {
+  //   c.rank = i + 1
+  //   c.selected = false
+  //   return c
+  // })
+
+  // const candidateNames = candidates.map(c => c.candidate_name)
+  // const profiles = await this._vm.$profiles.getProfiles(candidateNames)
+  // candidates.forEach(c => {
+  //   const candProfile = profiles.find(p => p.account === c.candidate_name)
+  //   if (candProfile) {
+  //     c.profile = candProfile.profile
+  //   } else {
+  //     c.profile = false
+  //   }
+  // })
+
+  // mockdata
+  const candidatesMock = candidatesMockdata.map((c, i) => {
     c.rank = i + 1
+    c.profile.description = c.profile.other
     c.selected = false
     return c
   })
 
-  const candidateNames = candidates.map(c => c.candidate_name)
-  const profiles = await this._vm.$profiles.getProfiles(candidateNames)
-  candidates.forEach(c => {
-    const candProfile = profiles.find(p => p.account === c.candidate_name)
-    if (candProfile) {
-      c.profile = candProfile.profile
-    } else {
-      c.profile = false
-    }
-  })
-  console.log('active candidates with profile', candidates)
-  commit('setCandidates', candidates)
-  return candidates
+  console.log('active candidates with profile', candidatesMock)
+  commit('setCandidates', candidatesMock)
+  return candidatesMock
 }
 
-export async function fetchDacAdmins ({ commit, dispatch }) {
+export async function fetchDacAdmins({ commit, dispatch }) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const authAccount = this._vm.$dir.getAccount(this._vm.$dir.ACCOUNT_AUTH)
   const res = await api.getAccount(authAccount)
@@ -89,7 +106,7 @@ export async function fetchDacAdmins ({ commit, dispatch }) {
   }
 }
 
-export async function fetchControlledAccounts ({ dispatch }) {
+export async function fetchControlledAccounts({ dispatch }) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const authAccount = this._vm.$dir.getAccount(this._vm.$dir.ACCOUNT_AUTH)
   const ctrl = await api.getControlledAccounts(
@@ -98,7 +115,7 @@ export async function fetchControlledAccounts ({ dispatch }) {
   console.log(ctrl)
 }
 
-export async function fetchTokenStats ({ commit, dispatch, state }) {
+export async function fetchTokenStats({ commit, dispatch, state }) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const stats = await api.getTokenStats()
   if (stats) {
@@ -108,7 +125,7 @@ export async function fetchTokenStats ({ commit, dispatch, state }) {
   }
 }
 
-export async function fetchCustodianContractState ({ commit, dispatch, state }) {
+export async function fetchCustodianContractState({ commit, dispatch, state }) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const xstate = await api.getCustodianContractState()
   if (xstate) {
@@ -118,7 +135,7 @@ export async function fetchCustodianContractState ({ commit, dispatch, state }) 
   }
 }
 
-export async function fetchWpConfig ({ commit, dispatch, state }) {
+export async function fetchWpConfig({ commit, dispatch, state }) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const conf = await api.getContractConfig('wp')
   if (conf) {
@@ -126,7 +143,7 @@ export async function fetchWpConfig ({ commit, dispatch, state }) {
   }
 }
 
-export async function fetchTokenConfig ({ commit, dispatch, state }) {
+export async function fetchTokenConfig({ commit, dispatch, state }) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const conf = await api.getContractConfig('token')
   if (conf) {
@@ -135,7 +152,7 @@ export async function fetchTokenConfig ({ commit, dispatch, state }) {
   }
 }
 
-export async function fetchReferendumConfig ({ commit, dispatch, state }) {
+export async function fetchReferendumConfig({ commit, dispatch, state }) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const conf = await api.getContractConfig('referendum')
   if (conf) {
@@ -144,7 +161,7 @@ export async function fetchReferendumConfig ({ commit, dispatch, state }) {
   }
 }
 
-export async function fetchActivationStats ({ commit, dispatch, state }) {
+export async function fetchActivationStats({ commit, dispatch, state }) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const conf = await api.getContractConfig('custodian')
   const tokenStats = await api.getTokenStats()
@@ -222,7 +239,7 @@ export async function fetchActivationStats ({ commit, dispatch, state }) {
   commit('setActivationStats', activationStats)
 }
 
-export async function fetchCustodianPermissions ({
+export async function fetchCustodianPermissions({
   commit,
   dispatch,
   state,
@@ -248,21 +265,21 @@ export async function fetchCustodianPermissions ({
   return requested
 }
 
-export async function fetchWorkerProposal ({ commit, dispatch }, payload = {}) {
+export async function fetchWorkerProposal({ commit, dispatch }, payload = {}) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const wps = api.getWpsById(payload)
   // commit('setWorkerProposals', wps)
   return wps
 }
 
-export async function fetchWorkerProposals ({ commit, dispatch }, payload = {}) {
+export async function fetchWorkerProposals({ commit, dispatch }, payload = {}) {
   const api = await dispatch('global/getDacApi', false, { root: true })
   const wps = api.getWps(payload)
   commit('setWorkerProposals', wps)
   return wps
 }
 
-export async function fetchWorkerProposalsInbox (obj, payload = {}) {
+export async function fetchWorkerProposalsInbox(obj, payload = {}) {
   let url = this._vm.$configFile.get('dacapi')
   const header = {
     'X-DAC-Name': this._vm.$dir.dacId
@@ -286,7 +303,7 @@ export async function fetchWorkerProposalsInbox (obj, payload = {}) {
 
 // canceltoken to fix glitch when multiple requests are made fast
 var call
-export async function fetchMsigProposals (obj, payload = {}) {
+export async function fetchMsigProposals(obj, payload = {}) {
   // {status: 1, limit:0, skip: 1}
   if (call) {
     call.cancel()
@@ -314,7 +331,7 @@ export async function fetchMsigProposals (obj, payload = {}) {
     })
 }
 
-export async function fetchReferendums (obj, payload = {}) {
+export async function fetchReferendums(obj, payload = {}) {
   if (call) {
     call.cancel()
   }
@@ -341,12 +358,13 @@ export async function fetchReferendums (obj, payload = {}) {
     })
 }
 
-export async function fetchTokenTimeLine (obj, payload = {}) {
+export async function fetchTokenTimeLine(obj, payload = {}) {
   // {account: 'piecesnbitss', contract:'kasdactokens', symbol:'KASDAC', start_block:10000000, end_block:17000000}
   let url = this._vm.$configFile.get('dacapi')
   const header = {
     'X-DAC-Name': this._vm.$dir.dacId
   }
+
   return this._vm
     .$axios({
       method: 'get',
@@ -364,7 +382,7 @@ export async function fetchTokenTimeLine (obj, payload = {}) {
     })
 }
 
-export async function fetchDACTokenTransfers (obj, payload = {}) {
+export async function fetchDACTokenTransfers(obj, payload = {}) {
   let url = this._vm.$configFile.get('dacapi')
   const header = {
     'X-DAC-Name': this._vm.$dir.dacId
@@ -386,7 +404,7 @@ export async function fetchDACTokenTransfers (obj, payload = {}) {
     })
 }
 
-export async function fetchMemberCounts (obj, payload = {}) {
+export async function fetchMemberCounts(obj, payload = {}) {
   let url = this._vm.$configFile.get('dacapi')
   const header = {
     'X-DAC-Name': this._vm.$dir.dacId
@@ -408,7 +426,7 @@ export async function fetchMemberCounts (obj, payload = {}) {
     })
 }
 
-export async function fetchVotesTimeline (obj, payload = {}) {
+export async function fetchVotesTimeline(obj, payload = {}) {
   let url = this._vm.$configFile.get('dacapi')
   const header = {
     'X-DAC-Name': this._vm.$dir.dacId
@@ -430,7 +448,7 @@ export async function fetchVotesTimeline (obj, payload = {}) {
     })
 }
 
-export async function fetchTokenMarketData (obj, payload = {}) {
+export async function fetchTokenMarketData(obj, payload = {}) {
   const pricefeed = this._vm.$configFile.get('pricefeed')
   if (pricefeed && pricefeed.newdex.endpoint) {
     try {
@@ -443,7 +461,7 @@ export async function fetchTokenMarketData (obj, payload = {}) {
   return false
 }
 
-export async function fetchTokenHistoryPrice (obj, payload = {}) {
+export async function fetchTokenHistoryPrice(obj, payload = {}) {
   let url =
     'https://api.coingecko.com/api/v3/coins/eosdac/market_chart?vs_currency=usd&days=7'
   console.log(url)

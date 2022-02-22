@@ -81,6 +81,7 @@
 // import Vue from 'vue'
 import Msigproposal from 'components/ui/msig-proposal'
 import dacEvents from 'components/dacevents/dac-events'
+import { proposalsMockdata } from '../statics/mockdata/proposals.json'
 
 import { mapGetters } from 'vuex'
 
@@ -176,21 +177,26 @@ export default {
     },
 
     async getProposals (query, filterFn = null) {
-      this.msigs_loading = true
-      let p = await this.$store.dispatch('dac/fetchMsigProposals', query)
-      if (p) {
-        console.log('msigs', p)
-        this.proposals = []
-        this.total = p.count
-        this.pagination.max = Math.ceil(
-          p.count / this.pagination.items_per_page
-        )
-        if (filterFn) {
-          this.proposals = p.results.filter(filterFn)
-        } else {
-          this.proposals = p.results
-        }
-      }
+      // this.msigs_loading = true
+      // let p = await this.$store.dispatch('dac/fetchMsigProposals', query)
+      // if (p) {
+      //   console.log('msigs', p)
+      //   this.proposals = []
+      //   this.total = p.count
+      //   this.pagination.max = Math.ceil(
+      //     p.count / this.pagination.items_per_page
+      //   )
+      //   if (filterFn) {
+      //     this.proposals = p.results.filter(filterFn)
+      //   } else {
+      //     this.proposals = p.results
+      //   }
+      // }
+      // this.msigs_loading = false
+
+      this.proposals = proposalsMockdata
+      this.total = proposalsMockdata.length
+      this.pagination.max = 1
       this.msigs_loading = false
     }
   },

@@ -1,0 +1,35 @@
+{
+    "custodiansMockdata": [
+        {
+            "cust_name": "aasdasdsadasdasd",
+            "candidate_name": "aioshiaioshi",
+            "custodian_end_time_stamp": "1970-01-01T00:00:00",
+            "is_active": 1,
+            "locked_tokens": "75.5000 EYE",
+            "rank": 1,
+            "requestedpay": "9.0000 TLM",
+            "selected": false,
+            "total_votes": 12505,
+            "profile": {
+                "account_name": "aioshiaioshi",
+                "bio": "Other fracture of left great toe",
+                "familyName": "aioshi",
+                "givenName": "Erik",
+                "other": "DAO enthusiast",
+                "cancel": false,
+                "download": false,
+                "edit": false,
+                "female": false,
+                "gender": "male",
+                "male": true,
+                "maxLinksmsg": "Sorry, max {number_allowed_links} links allowed.",
+                "profile": "Profile",
+                "profile_picture_url": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-girl-cat-names-1606245046.jpg?crop=0.668xw:1.00xh;0.126xw,0&resize=640:*",
+                "save": true,
+                "social_link": "https://www.google.com/",
+                "social_profile_link": "https://www.chess.com/play/online",
+                "website": "https://mortyaw.backlog.com/dashboard"
+            }
+        }
+    ]
+}

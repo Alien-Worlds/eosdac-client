@@ -9,7 +9,7 @@
 
       <div class="row q-col-gutter-lg">
         <!-- first column  -->
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-8" style="overflow-y: scroll; max-height: 80vh;">
           <!-- <pre>{{getSelectedCand}}</pre> -->
             <div class="text-h5">
               {{ $t("vote_custodians.candidate_list") }} - {{ custodians.length }}

@@ -52,7 +52,9 @@
               <br />
               <span>
                 <span>{{ $t("candidate.votes") }}:</span>
-                {{ $helper.toLocaleNumber(data.total_votes / Math.pow(10, this.dacSymbolPrecision()), this.dacSymbolPrecision()) }}
+                <!-- mockdata -->
+                {{ data.total_votes.toFixed(0)}}
+                <!-- {{ $helper.toLocaleNumber(data.total_votes / Math.pow(10, this.dacSymbolPrecision()), this.dacSymbolPrecision()) }} -->
               </span>
               <!--<span>
                 <span class="q-pl-md">{{ $t("candidate.staked") }}:</span>
@@ -66,7 +68,7 @@
           style="border-top:1px solid grey; overflow-x: hidden"
         >
           <q-scroll-area
-            style="width: 100%; height: 300px;"
+            style="width: 100%; height: 50px;"
             :thumb-style="{
               right: '-13px',
               borderRadius: '2px',

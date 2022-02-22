@@ -28,10 +28,16 @@
 
       <q-card-section>
           <!-- {{ selected_token }} -->
+          <!-- mockdata -->
+          <!-- <xspan
+                    class="absolute-right q-mr-md q-mt-sm"
+                    :value="$helper.assetToLocaleNumber(balance)"
+            /> -->
+
           <div class="q-pa-none relative-position">
             <xspan
                     class="absolute-right q-mr-md q-mt-sm"
-                    :value="$helper.assetToLocaleNumber(balance)"
+                    :value="567.892"
             />
 
             <balance-timeline

@@ -1,18 +1,18 @@
 <template>
-    <div class="balance-timeline-card">
-      <div v-if="description != ''" class="q-my-md">
-          {{ description }}
-      </div>
-      <div>
-        <line-chart
-                ref="linechart"
-                :chartData="chartData"
-                :options="chartOptions"
-                :width="width"
-                :height="height"
-        />
-      </div>
+  <div class='balance-timeline-card'>
+    <div v-if='description !=""'  class='q-my-md'>
+      {{ description }}
     </div>
+    <div>
+      <line-chart
+        ref='linechart'
+        :chartData='chartData'
+        :options='chartOptions'
+        :width='width'
+        :height='height'
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -71,7 +71,7 @@ export default {
       default: 300
     }
   },
-  data () {
+  data() {
     return {
       refblock: null,
       refdate: null,
@@ -81,7 +81,7 @@ export default {
         responsive: this.responsive,
         maintainAspectRatio: false,
         legend: {
-          display: this.legend
+          display: this.legend,
         },
         scales: {
           xAxes: [
@@ -91,34 +91,34 @@ export default {
                 unit: 'month',
                 unitStepSize: 3,
                 displayFormats: {
-                  month: 'MMM'
-                }
+                  month: 'MMM',
+                },
               },
               gridLines: {
-                color: 'rgba(0, 0, 0, 0)'
+                color: 'rgba(0, 0, 0, 0)',
               },
               ticks: {
                 // beginAtZero: false,
                 // stepSize: 15
-              }
-            }
+              },
+            },
           ],
           yAxes: [
             {
               gridLines: {
                 color: 'rgba(0, 0, 0, 0)',
-                zeroLineColor: '#3E3E3E'
+                zeroLineColor: '#3E3E3E',
               },
               ticks: {
                 display: true,
-                beginAtZero: true
-              }
-            }
-          ]
+                beginAtZero: true,
+              },
+            },
+          ],
         },
         hover: {
           mode: 'index',
-          intersect: false
+          intersect: false,
         },
         tooltips: {
           mode: 'index',
@@ -135,22 +135,22 @@ export default {
             },
             label: function (tooltipItem, data) {
               return `${data['datasets'][0]['data'][tooltipItem['index']]}`
-            }
+            },
           },
           titleFontSize: 12,
           bodyFontSize: 12,
-          displayColors: false
-        }
-      }
+          displayColors: false,
+        },
+      },
     }
   },
   computed: {
     ...mapGetters({
-      getNodeInfo: 'global/getNodeInfo'
-    })
+      getNodeInfo: 'global/getNodeInfo',
+    }),
   },
   methods: {
-    async init () {
+    async init() {
       console.log(`init`)
       let { head_block_num: headBlockNum, head_block_time: headBlockTime } =
         this.getNodeInfo || (await this.$store.dispatch('global/testEndpoint'))
@@ -163,13 +163,15 @@ export default {
           contract: this.contract,
           symbol: this.symbol,
           start_block: 0,
-          end_block: this.end_block
+          end_block: this.end_block,
         })
       } else {
-        console.log(`account: ${this.account} contract: ${this.contract}, symbol: ${this.symbol}`)
+        console.log(
+          `account: ${this.account} contract: ${this.contract}, symbol: ${this.symbol}`
+        )
       }
     },
-    getGradient (colorstylvar) {
+    getGradient(colorstylvar) {
       if (!this.$refs.linechart || !this.$refs.linechart.$refs) {
         return
       }
@@ -183,38 +185,48 @@ export default {
       gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`)
       return gradient
     },
-    async getTokenTimeLine (query) {
-      let res = await this.$store.dispatch('dac/fetchTokenTimeLine', query)
-      if (!res || !res.results) return false
+    async getTokenTimeLine(query) {
+      // mockdata
+      // let res = await this.$store.dispatch('dac/fetchTokenTimeLine', query)
+      // if (!res || !res.results) return false
+      let res = { results: [] }
+      res.results = [
+        { x: 1, y: 1 },
+        { x: 2, y: 2 },
+        { x: 3, y: 3 },
+        { x: 4, y: 4 },
+        { x: 5, y: 5 },
+      ]
+      let labels = ['a', 'b', 'c', 'd', 'e']
       this.chartData = {
-        labels: res.results.map(p => this.numToTime(p.block_num)),
+        labels: labels,
         datasets: [
           {
             label: `${query.account} ${query.symbol}`,
-            data: res.results.map(p => p.balance.split(' ')[0]),
+            data: res.results,
             lineTension: 0,
             backgroundColor: this.getGradient('primary'),
             borderColor: colors.getBrand('primary'),
             pointBackgroundColor: 'none',
             borderWidth: 1,
             pointBorderColor: 'none',
-            pointRadius: 0
-          }
-        ]
+            pointRadius: 0,
+          },
+        ],
       }
       let vals = this.chartData.datasets[0].data
       let balance = `${vals[vals.length - 1]} ${this.symbol}`
       this.balance = balance
       this.$emit('onbalance', balance)
     },
-    numToTime (blocknum) {
+    numToTime(blocknum) {
       let diff = (this.refblock - blocknum) * 2 // seconds
       let r = date.subtractFromDate(this.refdate, { seconds: diff })
       return r
-      // return date.formatDate(r, 'MMM DD');
-    }
+      // return date.formatDate(r, 'MMM DD')
+    },
   },
-  async mounted () {
+  async mounted() {
     this.init()
   },
   watch: {
@@ -227,8 +239,8 @@ export default {
     contract: function () {
       console.log(`Contract changed`)
       this.init()
-    }
-  }
+    },
+  },
   //
 }
 </script>

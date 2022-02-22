@@ -40,10 +40,11 @@
           </q-card-section>
           <q-card-section>
               <div class="relative-position">
-                <div class="cust_only_overlay" v-if="!getIsCustodian">
+                <!-- mockdata -->
+                <!-- <div class="cust_only_overlay" v-if="!getIsCustodian">
                   <q-icon name="lock" class="q-mr-xs" />
                   {{ $t("dac_financials.cust_only") }}
-                </div>
+                </div> -->
                 <div class="q-pa-md">
                   <msig-transfer
                           @onsubmit="addToQueue($event)"
@@ -68,13 +69,14 @@
                 {{ $t("dac_financials.trx_que") }}
               </q-item-section>
               <q-item-section side>
-                <q-btn flat round dense icon="more_vert" :disable="!getIsCustodian" v-if="trxQueue.length > 1">
-                  <q-popup-proxy v-if="getIsCustodian">
+                <q-btn flat round dense icon="more_vert" v-if="trxQueue.length > 1">
+                  <q-popup-proxy >
                     <q-list highlight>
                       <q-item class="cursor-pointer q-body-1 ">
                         <q-item-section>
                           <label
                                   for="myInput"
+                                  style="color: #000"
                                   class="cursor-pointer full-width"
                           >
                             {{ $t("dac_financials.import_file") }}
@@ -94,14 +96,14 @@
                               v-close-popup
                               @click.native="downloadReport"
                       >
-                        <q-item-section>{{ $t("dac_financials.export") }}</q-item-section>
+                        <q-item-section style="color: #000">{{ $t("dac_financials.export") }}</q-item-section>
                       </q-item>
                       <q-item
                               class="cursor-pointer q-body-1"
                               v-close-popup
                               @click.native="clearQueue"
                       >
-                        <q-item-section>{{ $t("dac_financials.clear") }}</q-item-section>
+                        <q-item-section style="color: #000">{{ $t("dac_financials.clear") }}</q-item-section>
                       </q-item>
                       <q-item
 
@@ -109,7 +111,7 @@
                               v-close-popup
                               @click.native="proposeAll"
                       >
-                        <q-item-section>{{ $t("dac_financials.exec") }}</q-item-section>
+                        <q-item-section style="color: #000">{{ $t("dac_financials.exec") }}</q-item-section>
                       </q-item>
                     </q-list>
                   </q-popup-proxy>
@@ -119,17 +121,18 @@
           </q-card-section>
           <q-card-section>
               <div class="relative-position">
-                <div class="cust_only_overlay" v-if="!getIsCustodian">
+                <!-- mockdata -->
+                <!-- <div class="cust_only_overlay" v-if="!getIsCustodian">
                   <q-icon name="lock" class="q-mr-xs" />
                   {{ $t("dac_financials.cust_only") }}
-                </div>
+                </div> -->
 
                 <q-scroll-area
                         style="height: 380px; padding-bottom:8px"
                         :thumb-style="getThumbStyle()"
                         :delay="1500"
                 >
-                  <q-list dense no-border separator highlight>
+                  <q-list dense no-border separator highlight style="margin-top: 20px">
                     <div
                             v-if="trxQueue.length === 0"
                             class="text-weight-thin text-center q-body-1 q-mt-md"
@@ -268,6 +271,7 @@ import msigTransfer from 'components/controls/msig-transfer'
 // import { saveAs } from 'file-saver'
 // import custodianPayments from "components/controls/custodian-payments";
 import { colors, Notify, openURL } from 'quasar'
+import { txsMockdata } from '../../statics/mockdata/transactions.json'
 
 export default {
   name: 'dacFinancials',
@@ -287,8 +291,9 @@ export default {
         }
       ],
       permissions_map: [],
-
-      trxQueue: this.$store.state.user.msigTransferQeue
+      // mockdata
+      // trxQueue: this.$store.state.user.msigTransferQeue
+      trxQueue: txsMockdata
     }
   },
 

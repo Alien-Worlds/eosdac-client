@@ -1,450 +1,114 @@
 <template>
-  <q-card>
-    <!-- no props set = custom_mode -->
-    <div v-if="account === '' && name === ''">
-      <div class="row">
-        <q-item>
-          <q-item-section>
-            <q-input
-              v-model="custom_mode.account"
-              type="text"
-              debounce="1000"
-              :label="$t('actionmaker.contract_name')"
-              placeholder="eg. eosio/eosio.token"
-              @input="loadActions"
-            >
-              <q-autocomplete
-                :min-characters="0"
-                @selected="custom_mode_parse_actions(custom_mode.account)"
-                :static-data="{
-                  field: 'value',
-                  list: Object.keys($configFile.configFile.contracts)
-                    .sort()
-                    .map(fa => {
-                      return {
-                        value: $configFile.configFile.contracts[fa].name,
-                        label: $configFile.configFile.contracts[fa].name
-                      };
-                    })
-                }"
-              />
-            </q-input>
-          </q-item-section>
-          <q-item-section side>
-            <q-btn
-              color="primary"
-              flat
-              label="load"
-              @click="loadActions"
-            />
-          </q-item-section>
-        </q-item>
-      </div>
-
-      <div v-if="custom_mode.abi.actions" class="row q-mb-md q-pa-xs">
-        <q-btn
-          size="12px"
-          :icon="$configFile.icon.action"
-          v-for="(action, i) in custom_mode.abi.actions"
-          :label="action.name"
-          :key="`a${i}`"
-          color="secondary"
-          class="animate-pop q-ma-xs"
-          @click="
-            (custom_mode.action_name = action.name) &&
-            (custom_mode.action_type = action.type)
-          "
-        />
-      </div>
-    </div>
-
-    <div
-      v-if="data_fields.length"
-      class=" animate-fade q-pa-md q-mt-md rounded-borders"
-    >
-      <div class="row justify-between items-center q-mb-md">
-          <q-breadcrumbs separator=" > ">
-              <q-breadcrumbs-el>{{ this.account || custom_mode.account }}</q-breadcrumbs-el>
-              <q-breadcrumbs-el>{{ this.name || custom_mode.action_name }}</q-breadcrumbs-el>
-          </q-breadcrumbs>
-
-        <auth-display v-model="authorization" :auth="getAuth" />
-      </div>
-      <div class="row q-col-gutter-md">
-        <div
-          v-for="(field, i) in data_fields"
-          :key="`field_${i}`"
-          class="col-xs-12 col-md-6"
-        >
-            <div>
-              <div v-if="field.type == 'bytes'" class="full-width">
-                <file-input
-                  style="margin-top:20px"
-                  v-if="field.name == 'abi'"
-                  v-model="field.value"
-                  label="Select abi"
-                  :asbuffer="false"
-                />
-                <file-input
-                  style="margin-top:20px"
-                  v-if="field.name == 'code'"
-                  v-model="field.value"
-                  label="Select wasm"
-                  :asbuffer="true"
-                />
-              </div>
-              <div v-else-if="field.type == 'bool'">
-                 <q-toggle v-model="data_fields[i].value" :label="field.name" color="positive" left-label />
-              </div>
-              <div v-else-if="isNumberType(field.type)">
-                <q-input
-                  class="animate-fade"
-                  v-model="field.value"
-                  :name="field.name"
-                  ref="input"
-                  color="primary"
-                  :label="field.name"
-                  type="number"
-                  :placeholder="field.type"
-                />
-              </div>
-              <div v-else-if="field.type == 'asset'">
-                <q-input
-                  class="animate-fade"
-                  v-model="field.value"
-                  :name="field.name"
-                  ref="input"
-                  color="primary"
-                  :label="`${field.name} & symbol`"
-                  type="text"
-                  :placeholder="field.type"
-                />
-              </div>
-              <div v-else>
-                <q-input
-                  class="animate-fade"
-                  v-model="field.value"
-                  :name="field.name"
-                  ref="input"
-                  color="primary"
-                  :label="field.name"
-                  type="text"
-                  :placeholder="field.type"
-                />
-              </div>
-            </div>
-        </div>
-      </div>
-
-      <div class="row q-mt-md justify-end items-center">
-        <span
-          v-if="add_action_feedback != ''"
-          class="text-positive on-left animate-fade q-caption"
-          >{{ add_action_feedback }}</span
-        >
-        <q-btn
-          color="primary"
-          icon="add"
-          :label="$t('actionmaker.add_action')"
-          @click="processInputs"
-        />
-      </div>
-    </div>
-
-    <div v-if="isLoading" class="row justify-center">
-      <q-spinner-pie color="primary" :size="60" />
-    </div>
-    <div v-if="abi_load_error != ''" class="animate-fade q-pa-md text-negative q-caption">
-      {{ abi_load_error }}
-    </div>
-
-  </q-card>
+  <div>
+    <h1 id="sample-markdown">Sample Markdown</h1>
+    <p>This is some basic, sample markdown.</p>
+    <h1 id="ens-dao-constitution">ENS DAO Constitution</h1>
+    <p>
+      The ENS constitution is a set of binding rules that determine what
+      governance actions are legitimate for the DAO to take.
+    </p>
+    <p>
+      Each article has examples of permissible and non permissible actions.
+      These examples are illustrative and should not be considered a binding
+      part of the text of the constitution itself.
+    </p>
+    <h2 id="i-name-ownership-shall-not-be-infringed">
+      I. Name ownership shall not be infringed
+    </h2>
+    <p>
+      ENS governance will not enact any change that infringes on the rights of
+      ENS users to retain names they own, or unfairly discriminate against name
+      owners’ ability to extend, transfer, or otherwise use their names.
+    </p>
+    <h3 id="-examples-"><strong>Examples</strong></h3>
+    <p>
+      <strong>Permissible</strong>: ENS governance may enact a change affecting
+      the registration or extension costs of all names based on transparent
+      criteria such as length, as long as it pursues a goal outlined in this
+      constitution.
+    </p>
+    <p>
+      <strong>Not Permissible</strong>: ENS governance must not enact a change
+      increasing or reducing the extension costs of a list of existing ENS
+      names, as this would unfairly benefit or penalise a handpicked group.
+    </p>
+    <h2 id="ii-fees-are-primarily-an-incentive-mechanism">
+      II. Fees are primarily an incentive mechanism
+    </h2>
+    <p>
+      The primary purpose of registration fees is as an incentive mechanism to
+      prevent the namespace becoming overwhelmed with speculatively registered
+      names. A secondary purpose is to provide enough revenue to the DAO to fund
+      ongoing development and improvement of ENS. ENS governance will not enact
+      any fee other than for these purposes.
+    </p>
+    <h3 id="-examples-"><strong>Examples</strong></h3>
+    <p>
+      <strong>Permissible</strong>: ENS governance may increase the price of
+      name registrations in order to address excessive speculative registrations
+      induced by a price that is set too low, or because the current price is
+      insufficient to fund ongoing ENS operations at a reasonable level.
+    </p>
+    <p>
+      <strong>Not Permissible</strong>: ENS governance must not enact a change
+      imposing a fee for claiming DNS domains inside ENS, because such a fee
+      would be purely an income generating measure and not an incentive
+      mechanism.
+    </p>
+    <h2 id="iii-income-funds-ens-and-other-public-goods">
+      III. Income funds ENS and other public goods
+    </h2>
+    <p>
+      Any income generated to the ENS treasury is to be used first of all to
+      ensure the long-term viability of ENS, and to fund continuing development
+      and improvement of the ENS system. Funds that are not reasonably required
+      to achieve this goal may be used to fund other public goods within web3 as
+      ENS governance sees fit.
+    </p>
+    <p>
+      ENS governance will not allocate funds to a team or individual who does
+      not commit to uphold the same principles outlined in this constitution in
+      their use of the allocated funds.
+    </p>
+    <h3 id="-examples-"><strong>Examples</strong></h3>
+    <p>
+      <strong>Permissible</strong>: ENS governance may offer grant funding for a
+      public good unrelated to ENS or Ethereum, so long as doing so does not
+      affect the long-term viability of ENS.
+    </p>
+    <p>
+      <strong>Not Permissible</strong>: ENS governance must not use the funds to
+      support projects that conflict with the goals of ENS.
+    </p>
+    <h2 id="iv-ens-integrates-with-the-global-namespace">
+      IV. ENS Integrates with the global namespace
+    </h2>
+    <p>
+      In order to facilitate making the most widely usable naming system, ENS
+      aims to integrate with the legacy DNS naming system to the greatest extent
+      possible without sacrificing decentralization of ENS. ENS governance will
+      not enact changes that compromise ENS’s ability to do this.
+    </p>
+    <h3 id="-examples-"><strong>Examples</strong></h3>
+    <p>
+      <strong>Permissible</strong>: ENS governance should grant control of a
+      top-level domain to its owner in the DNS system on request.
+    </p>
+    <p>
+      <strong>Not permissible</strong>: ENS governance must not create new
+      top-level domains unless those domains have been granted to ENS by a DNS
+      authority.
+    </p>
+    <h2 id="v-amendments-to-this-constitution-by-majority-vote">
+      V. Amendments to this constitution by majority vote
+    </h2>
+    <p>
+      Any change may be made to this constitution only by two-thirds majority
+      and at least 1% of all tokens participating.
+    </p>
+  </div>
 </template>
 
 <script>
-import fileInput from 'components/controls/file-input'
-import authDisplay from 'components/ui/auth-display'
-const prettyHtml = require('json-pretty-html').default
-import { mapGetters } from 'vuex'
-const { TextDecoder, TextEncoder } = require('text-encoding')
-const { Serialize } = require('@jafri/eosjs2')
-const numberTypes = [
-  'uint8',
-  'int8',
-  'uint16',
-  'int16',
-  'uint32',
-  'uint64',
-  'int64',
-  'int32',
-  'varuint32',
-  'varint32',
-  'uint128',
-  'int128',
-  'float32',
-  'float64',
-  'float128'
-]
-import { Notify } from 'quasar'
-
-export default {
-  name: 'actionMaker',
-  components: {
-    fileInput,
-    authDisplay
-  },
-  props: {
-    account: {
-      type: String,
-      default: ''
-    },
-    name: {
-      type: String,
-      default: ''
-    },
-    prefill: {
-      type: Object,
-      default: function () {
-        return {}
-      }
-    },
-    auth: {
-      type: Array,
-      default: function () {
-        return []
-      }
-    },
-    msigmode: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data () {
-    return {
-      add_action_feedback: '',
-      abi_load_error: '',
-
-      isLoading: false,
-
-      data_fields: [],
-      authorization: [],
-
-      custom_mode: {
-        account: '',
-        action_name: '',
-        action_type: '',
-        abi: {}
-      }
-    }
-  },
-  computed: {
-    ...mapGetters({
-      getDacApi: 'global/getDacApi',
-      getAccountName: 'user/getAccountName',
-      getAccount: 'user/getAccount'
-    }),
-    getAuth () {
-      if (this.getAccountName && this.getAccount) {
-        if (this.auth.length) {
-          return this.auth
-        }
-      }
-
-      return []
-    }
-  },
-
-  methods: {
-    prettyHtml,
-    async getAbi (contract) {
-      if (!this.getDacApi) return
-      this.abi_load_error = ''
-      this.isLoading = true
-
-      let abi = await this.getDacApi.eos.get_abi(contract).catch(e => {
-        console.log(e)
-      })
-
-      this.isLoading = false
-      if (abi && abi.abi) {
-        return abi.abi
-      } else {
-        this.abi_load_error = `ABI for ${contract} not found`
-        return false
-      }
-    },
-
-    async loadActions (contract) {
-      this.data_fields = []
-      if (contract) {
-        this.custom_mode_parse_actions(contract)
-      } else {
-        this.custom_mode.abi = {}
-      }
-    },
-
-    getDataFieldsForActionType (abi, actionType) {
-      if (abi && abi.structs) {
-        let struct = abi.structs.find(s => s.name === actionType)
-        return struct.fields
-      }
-    },
-
-    async setFieldsModel (contract, actionName, abi = false) {
-      this.data_fields = []
-
-      let actions = abi || (await this.getAbi(contract))
-      let fields = this.getDataFieldsForActionType(actions, actionName)
-      if (!fields) return
-      this.data_fields = fields.map(f => {
-        if (this.prefill[f.name]) {
-          f.value = this.prefill[f.name]
-        } else {
-          f.value = ''
-        }
-        return f
-      })
-    },
-
-    async processInputs () {
-      let processError = false
-      let actionData = this.data_fields.reduce((res, input) => {
-        // validate and cast types
-        let value = String(input.value).trim()
-
-        if (
-          (value.includes('[') && value.includes(']')) ||
-          (value.includes('{') && value.includes('}'))
-        ) {
-          value = JSON.parse(value)
-        } else if (this.isNumberType(input.type)) {
-          value = Number(value)
-        } else if (input.type === 'bool') {
-          value = value === 'true'
-        } else if (input.type === 'name' || input.type === 'account_name') {
-          if (!this.$helper.isAccountname(value) && value !== '') {
-            processError = `${input.name}: invalid accountname`
-          }
-        } else if (input.type === 'asset') {
-          let [quantity, symbol] = value.replace(/\s\s+/g, ' ').split(' ')
-          if (!quantity || !symbol || symbol.length < 3) {
-            processError = `${input.name}: invalid asset`
-          } else {
-            value = Number(quantity).toFixed(4) + ' ' + symbol.toUpperCase()
-          }
-        }
-
-        res[`${input.name}`] = value
-        return res
-      }, {})
-
-      if (processError) {
-        this.$q.notify({
-          message: `Input Error`,
-          timeout: 7000,
-          type: 'negative',
-          detail: processError,
-          position: 'bottom-right',
-          closeBtn: true
-        })
-        return
-      }
-
-      let action = {
-        account: this.account || this.custom_mode.account,
-        name: this.name || this.custom_mode.action_name,
-        data: actionData
-      }
-      action.hex = await this.serializeActionData(action)
-
-      action.authorization = JSON.parse(this.authorization)
-
-      if (!action.hex) {
-        return
-      }
-
-      this.add_action_feedback = `Action added`
-      setTimeout(() => {
-        this.add_action_feedback = ''
-      }, 1500)
-
-      this.custom_mode.account = ''
-      this.custom_mode.action_name = ''
-      this.loadActions('')
-
-      this.$emit('actiondata', action)
-    },
-
-    async serializeActionData (action) {
-      try {
-        let account = action.account
-        let name = action.name
-        let data = action.data
-        const contract = await this.getDacApi.eosapi.getContract(account)
-        let hex = Serialize.serializeActionData(
-          contract,
-          account,
-          name,
-          data,
-          new TextEncoder(),
-          new TextDecoder()
-        )
-        return hex
-      } catch (e) {
-        console.log(e)
-        Notify.create({
-          message: `Serialize` + e.stack.split('\n')[0],
-          detail: 'See console for more info',
-          timeout: 2000,
-          type: 'negative',
-          position: 'bottom-right'
-        })
-        return false
-      }
-    },
-
-    async custom_mode_parse_actions (accountname) {
-      this.custom_mode.action_name = ''
-      if (!this.$helper.isAccountname(accountname)) {
-        console.log(`"${accountname}" is not a valid accountname`)
-        return false
-      }
-      this.custom_mode.abi = {}
-
-      let abi = await this.getAbi(accountname).catch(e => {
-        this.isLoading = false
-      })
-      if (abi) {
-        this.custom_mode.abi = abi
-      }
-    },
-
-    isNumberType (type) {
-      return numberTypes.includes(type)
-    }
-  },
-
-  async mounted () {
-    if (this.account !== '' && this.name !== '') {
-      await this.setFieldsModel(this.account, this.name)
-    }
-  },
-  watch: {
-    'custom_mode.action_name': function (oldv, newv) {
-      if (oldv !== newv) {
-        this.setFieldsModel(
-          this.custom_mode.account,
-          this.custom_mode.action_type,
-          JSON.parse(JSON.stringify(this.custom_mode.abi))
-        )
-      }
-    },
-
-    name: function () {
-      if (this.account && this.name) {
-        this.setFieldsModel(this.account, this.name)
-      }
-    }
-  }
-}
 </script>
+

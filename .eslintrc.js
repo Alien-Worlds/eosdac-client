@@ -38,7 +38,7 @@ module.exports = {
     // allow paren-less arrow functions
     'arrow-parens': 'off',
     'one-var': 'off',
-
+    'space-before-function-paren': 'off',
     'import/first': 'off',
     'import/named': 'error',
     'import/namespace': 'error',
@@ -48,6 +48,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
+    'comma-dangle': 'off',
+    'no-extra-semi': 'off',
 
     /**
      * Allow spaces for variable declarations

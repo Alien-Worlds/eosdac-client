@@ -132,7 +132,7 @@ export class DacApi {
     }
 
     return stats
-    /* debugger;
+    /*
 
     return {
       maxSupply: "1000000000.0000 SENSE",

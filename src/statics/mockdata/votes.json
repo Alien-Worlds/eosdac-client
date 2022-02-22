@@ -1,0 +1,54 @@
+{
+    "votesMockdata": [
+        {
+            "candidate": "xok.wam",
+            "votes": [
+                {
+                    "block_timestamp": "2022-02-11T13:14:14",
+                    "votes": 25665525
+                },
+                {
+                    "block_timestamp": "2022-03-11T14:14:14",
+                    "votes": 32131545
+                },
+                {
+                    "block_timestamp": "2022-04-11T15:14:14",
+                    "votes": 15415454
+                },
+                {
+                    "block_timestamp": "2022-05-11T16:14:14",
+                    "votes": 54645217
+                },
+                {
+                    "block_timestamp": "2022-06-11T17:14:14",
+                    "votes": 98564231
+                }
+            ]
+        },
+        {
+            "candidate": "ply.wam",
+            "votes": [
+                {
+                    "block_timestamp": "2022-07-11T13:14:14",
+                    "votes": 54512154
+                },
+                {
+                    "block_timestamp": "2022-08-11T14:14:14",
+                    "votes": 52745454
+                },
+                {
+                    "block_timestamp": "2022-09-11T15:14:14",
+                    "votes": 12351525
+                },
+                {
+                    "block_timestamp": "2022-10-11T16:14:14",
+                    "votes": 54352254
+                },
+                {
+                    "block_timestamp": "2022-11-11T17:14:14",
+                    "votes": 44545635
+                }
+            ]
+        }
+    ]
+}

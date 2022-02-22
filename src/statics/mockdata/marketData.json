@@ -1,0 +1,12 @@
+{
+    "marketDataMockdata": 
+        {
+          "currency": "975",
+          "last": "2360",
+          "change": 0.2,
+          "amount": 1500,
+          "high": 1200,
+          "low": 900
+        }
+    
+}
