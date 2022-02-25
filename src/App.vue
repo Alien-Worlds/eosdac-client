@@ -239,10 +239,13 @@ export default {
   },
 
   async created () {
-    Sentry.init({
-      dsn: 'https://f4601392c9e449a29558cbbbfe16f39f@sentry.io/4817038',
-      integrations: [ new Integrations.Vue({ Vue, attachProps: true, logErrors: true }) ]
-    })
+    let shouldEnableSentry = false
+    if (shouldEnableSentry) {
+      Sentry.init({
+        dsn: 'https://f4601392c9e449a29558cbbbfe16f39f@sentry.io/4817038',
+        integrations: [ new Integrations.Vue({ Vue, attachProps: true, logErrors: true }) ]
+      })
+    }
 
     this.$store.dispatch('ui/loadTheme', { theme, q: this.$q })
 
