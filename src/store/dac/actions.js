@@ -408,24 +408,6 @@ export async function fetchMemberCounts (obj, payload = {}) {
     })
 }
 
-export async function fetchMemberTerms (obj, payload = {}) {
-  let url = this._vm.$configFile.get('dacapi')
-  const header = {
-    'X-DAC-Name': this._vm.$dir.dacId
-  }
-  return this._vm
-    .$axios({
-      method: 'get',
-      url: `${url}/memberterms`,
-      params: payload,
-      headers: header
-    })
-    .then(r => {
-      console.log(r.data)
-      return r.data
-    })
-}
-
 export async function fetchVotesTimeline (obj, payload = {}) {
   let url = this._vm.$configFile.get('dacapi')
   const header = {

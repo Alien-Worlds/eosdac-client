@@ -136,23 +136,37 @@ export default {
 
   methods: {
     async getConstitution () {
-      if (!this.getLatestMemberTerm.terms) {
-        console.log('!this.getLatestMemberTerm.terms')
-        return
-      }
+      if (!this.getLatestMemberTerm.terms) return
       this.isloading = true
-      let getCt = await this.$store.dispatch('dac/fetchMemberTerms')
-      this.md5_constitution = CryptoJS.MD5(getCt).toString()
-      // check if the fetched constitution matches the contract hash
-      // if(this.md5_constitution === this.latestMemberTerms.hash){
-      //   console.log('Constitution verified! Hashes match!')
-      // }
+      try {
+        let getCt = await this.loadConstitutionFromGithub(
+          this.getLatestMemberTerm.terms
+        )
+        this.md5_constitution = CryptoJS.MD5(getCt).toString()
 
-      this.constitution =
-        '<span class="animate-fade">' +
-        marked(getCt, { sanitize: true }) +
-        '</span>'
-      this.isloading = false
+        // check if the fetched constitution matches the contract hash
+        // if(this.md5_constitution === this.latestMemberTerms.hash){
+        //   console.log('Constitution verified! Hashes match!')
+        // }
+
+        this.constitution =
+          '<span class="animate-fade">' +
+          marked(getCt, { sanitize: true }) +
+          '</span>'
+        this.isloading = false
+      } catch (e) {
+        console.log(e)
+        this.isloading = false
+      }
+    },
+
+    async loadConstitutionFromGithub (url) {
+      try {
+        let constitution = await this.$axios.get(url)
+        return constitution.data
+      } catch (err) {
+        throw err
+      }
     },
 
     async signConstitution () {
