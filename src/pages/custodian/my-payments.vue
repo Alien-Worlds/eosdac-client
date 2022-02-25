@@ -152,7 +152,7 @@ export default {
       const actions = [
         {
           account: this.$dir.getAccount(this.$dir.ACCOUNT_CUSTODIAN),
-          name: 'claimpaye',
+          name: 'claimpay',
           data: {
             payid: id,
             dac_id: this.$dir.dacId
@@ -191,7 +191,7 @@ export default {
       const actions = this.pendingpay.slice(0, 10).map(pp => {
         return {
           account: contract,
-          name: 'claimpaye',
+          name: 'claimpay',
           data: {
             payid: pp.key,
             dac_id: this.$dir.dacId
