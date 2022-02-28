@@ -462,9 +462,9 @@ export default {
           account: this.systemmsig,
           name: 'unapprove',
           data: {
-            proposer: proposer,
             proposal_name: proposalName,
-            level: { actor: this.getAccountName, permission: this.getAuth }
+            level: { actor: this.getAccountName, permission: this.getAuth },
+            dac_id: this.$dir.dacId
           }
         }
       ]
