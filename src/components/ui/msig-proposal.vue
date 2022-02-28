@@ -482,9 +482,9 @@ export default {
           account: this.systemmsig,
           name: 'exec',
           data: {
-            proposer: proposer,
             proposal_name: proposalName,
-            executer: this.getAccountName
+            executer: this.getAccountName,
+            dac_id: this.$dir.dacId
           }
         }
       ]
