@@ -267,7 +267,7 @@ import financialAccount from 'components/ui/financial-account'
 import msigTransfer from 'components/controls/msig-transfer'
 // import { saveAs } from 'file-saver'
 // import custodianPayments from "components/controls/custodian-payments";
-import { colors, Notify, openURL } from 'quasar'
+import { colors, openURL } from 'quasar'
 
 export default {
   name: 'dacFinancials',
@@ -403,24 +403,9 @@ export default {
       // set status to the sending state 1
       trxData.status = 1
 
-      let permission = 'active' // default to active
-      let fromPermissions
-      try {
-        fromPermissions = await this.getPermissions(trxData.from)
-      } catch (e) {
-        console.log(`Could not get account for ${trxData.from}`, e)
-        Notify.create({
-          message: `Could not get account for ${trxData.from}`,
-          timeout: 2000,
-          type: 'negative',
-          position: 'bottom-right'
-        })
-      }
-
-      if (fromPermissions) {
-        const hasXfer = !!fromPermissions.find(fp => fp.perm_name === 'xfer')
-        permission = hasXfer ? `xfer` : `active`
-      }
+      const authorization = await this.$store.dispatch('dac/fetchCustodianPermissions', null, {
+        root: true
+      })
 
       let action = {
         account: trxData.asset.contract,
@@ -431,12 +416,7 @@ export default {
           quantity: trxData.asset.quantity,
           memo: trxData.memo.trim()
         },
-        authorization: [
-          {
-            actor: trxData.from,
-            permission: permission
-          }
-        ]
+        authorization
       }
 
       let res = await this.$store.dispatch('user/proposeMsig', {
