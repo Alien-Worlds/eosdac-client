@@ -503,9 +503,9 @@ export default {
           account: this.systemmsig,
           name: 'cancel',
           data: {
-            proposer: proposer,
             proposal_name: proposalName,
-            canceler: this.getAccountName
+            canceler: this.getAccountName,
+            dac_id: this.$dir.dacId
           }
         }
       ]
