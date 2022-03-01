@@ -27,7 +27,7 @@
           <q-item-label caption>
             <MarkdownViewer
                     :tags="[]"
-                    :text="msig.description.replace(/\n/g, ' ').replace(/#/g, '')"
+                    :text="msig.metadata.description"
                     :maxlen="140"
             />
           </q-item-label>

@@ -147,7 +147,7 @@ export default {
       }
     },
     currentStatus () {
-      const map = { inbox: 1, open: 1, executed: 2, cancelled: 0, expired: 3 }
+      const map = { inbox: 0, open: 0, executed: 1, cancelled: 2, expired: 2 }
       return map[this.active_tab]
     },
     managePagination () {
