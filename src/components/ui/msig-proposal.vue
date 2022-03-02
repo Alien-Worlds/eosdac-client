@@ -150,7 +150,7 @@
 
             <q-card-actions align="right" v-if="!read_only">
 
-              <q-btn-group v-if="msig.status === 1">
+              <q-btn-group v-if="msig.status === 0">
                 <q-btn
                         v-if="!isApproved"
                         color="positive"
@@ -177,7 +177,7 @@
                         @click="executeProposal(msig.proposer, msig.proposal_name)"
                 />
               </q-btn-group>
-              <q-btn-group v-if="msig.status === 3">
+              <q-btn-group v-if="msig.status === 1">
                 <q-btn
                         v-if="isCreator"
                         color="negative"
@@ -397,13 +397,13 @@ export default {
 
     getStatusColor: function () {
       let statuscolor = ''
-      if (this.msig.status === 1 && this.isApproved) {
+      if (this.msig.status === 0 && this.isApproved) {
         statuscolor = 'positive'
       }
       if (this.msig.status === 0) {
         statuscolor = 'negative'
       }
-      if (this.isExecutable || this.msig.status === 2) {
+      if (this.isExecutable || this.msig.status === 1) {
         statuscolor = 'info'
       }
       return statuscolor
