@@ -494,7 +494,7 @@ export default {
 
       const action = {
         account: this.$dir.getAccount(this.$dir.ACCOUNT_PROPOSALS),
-        name: 'updateconfig',
+        name: 'updateconfige',
         authorization: [
           {
             actor: this.$dir.getAccount(this.$dir.ACCOUNT_AUTH),
@@ -516,7 +516,7 @@ export default {
 
       const action = {
         account: this.$dir.getAccount(this.$dir.ACCOUNT_REFERENDUM),
-        name: 'updateconfig',
+        name: 'updateconfige',
         authorization: [
           {
             actor: this.$dir.getAccount(this.$dir.ACCOUNT_AUTH),

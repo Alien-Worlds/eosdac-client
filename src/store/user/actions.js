@@ -365,7 +365,7 @@ export async function proposeMsig (
 }
 
 function parseError (err) {
-  // example error: assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcand first.
+  // example error: assertion failure with message: ERR::UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND::Cannot unstake tokens for an active candidate. Call withdrawcane first.
   let message = '', parsed = ''
   if (typeof err === 'string') {
     message = err
