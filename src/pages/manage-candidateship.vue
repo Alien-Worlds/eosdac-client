@@ -363,7 +363,7 @@ export default {
 
       let registeraction = {
         account: this.$dir.getAccount(this.$dir.ACCOUNT_CUSTODIAN),
-        name: 'nominatecand',
+        name: 'nominatecane',
         data: {
           cand: this.getAccountName,
           requestedpay: this.verifyAndGetRequestedPay,
@@ -392,7 +392,7 @@ export default {
       let actions = [
         {
           account: this.$dir.getAccount(this.$dir.ACCOUNT_CUSTODIAN),
-          name: 'withdrawcand',
+          name: 'withdrawcane',
           data: {
             cand: this.getAccountName,
             dac_id: this.$dir.dacId

@@ -470,7 +470,7 @@ export default {
 
       const action = {
         account: this.$dir.getAccount(this.$dir.ACCOUNT_CUSTODIAN),
-        name: 'updateconfig',
+        name: 'updateconfige',
         authorization: [
           {
             actor: this.$dir.getAccount(this.$dir.ACCOUNT_AUTH),
