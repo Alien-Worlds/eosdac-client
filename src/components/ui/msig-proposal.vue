@@ -164,6 +164,12 @@
                         @click="unapproveProposal(msig.proposer, msig.proposal_name)"
                 />
                 <q-btn
+                        v-if="!isDenied"
+                        color="negative"
+                        :label="$t('proposal.deny')"
+                        @click="denyProposal(msig.proposer, msig.proposal_name)"
+                />
+                <q-btn
                         v-if="isCreator"
                         color="negative"
                         flat
@@ -468,6 +474,44 @@ export default {
           }
         }
       ]
+      let result = await this.$store.dispatch('user/transact', {
+        actions: actions
+      })
+      if (result) {
+        this.transactionCallback('e_unapproval')
+      }
+    },
+
+    async denyProposal (proposer, proposalName) {
+      const authAccount = this.$dir.getAccount(this.$dir.ACCOUNT_AUTH)
+      const actions = [
+        {
+          account: this.systemmsig,
+          name: 'deny',
+          data: {
+            proposal_name: proposalName,
+            level: { actor: this.getAccountName, permission: this.getAuth },
+            dac_id: this.$dir.dacId
+          }
+        }
+      ]
+      if (this.$configFile.get('paycpu')) {
+        actions.unshift(
+          {
+            account: 'eosdacpaycpu',
+            name: 'cpu',
+            authorization: [
+              {
+                actor: authAccount,
+                permission: 'one'
+              }
+            ],
+            data: {
+              dac_id: this.$dir.dacId
+            }
+          }
+        )
+      }
       let result = await this.$store.dispatch('user/transact', {
         actions: actions
       })
