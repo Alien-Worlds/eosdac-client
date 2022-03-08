@@ -164,7 +164,6 @@
                         @click="unapproveProposal(msig.proposer, msig.proposal_name)"
                 />
                 <q-btn
-                        v-if="!isDenied"
                         color="negative"
                         :label="$t('proposal.deny')"
                         @click="denyProposal(msig.proposer, msig.proposal_name)"
@@ -339,15 +338,6 @@ export default {
     isApproved: function () {
       if (this.msig.provided_approvals) {
         return !!this.msig.provided_approvals.find(
-          a => a.actor === this.getAccountName
-        )
-      } else {
-        return false
-      }
-    },
-    isDenied: function () {
-      if (this.msig.denials) {
-        return !!this.msig.denials.find(
           a => a.actor === this.getAccountName
         )
       } else {
