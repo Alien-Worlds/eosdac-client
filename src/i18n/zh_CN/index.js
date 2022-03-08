@@ -56,7 +56,7 @@ export default {
     'UNLOCK_INVALID_SYMBOL': '无效的符号名称',
     'UNLOCK_NON_EXISTING_SYMBOL': '带有符号的代币不存在，请在解锁前创造代币。',
     'UNSTAKE_CAND_NOT_REGISTERED': '候选人未注册。',
-    'UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND': '无法取消一名在任候选人的押注。需先调用 withdrawcand。',
+    'UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND': '无法取消一名在任候选人的押注。需先调用 withdrawcane。',
     'UNSTAKE_CANNOT_UNSTAKE_UNDER_TIME_LOCK': '在代币从延时中解锁前无法取消押注。',
     'UPDATEBIO_BIO_SIZE_TOO_LONG': '简介长度不得超过 256 个字符。',
     'UPDATECONFIG_INVALID_AUTH_HIGH_TO_NUM_ELECTED': '授权门槛无法使用超过选举产生托管人数量的值。',

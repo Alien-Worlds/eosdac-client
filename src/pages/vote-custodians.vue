@@ -333,7 +333,7 @@ export default {
       let actions = [
         {
           account: this.$dir.getAccount(this.$dir.ACCOUNT_CUSTODIAN),
-          name: 'votecuste',
+          name: 'votecust',
           data: {
             voter: this.getAccountName,
             newvotes: votes,

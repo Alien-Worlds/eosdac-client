@@ -61,7 +61,7 @@
             <q-item-section>{{$t(`manage_candidateship.current_stake`)}}</q-item-section>
 
             <q-item-section  class="text-right" no-wrap>
-              {{$helper.assetSymbolToLocaleNumber(getStakedDacBalance, $dir.symbol.symbol)}}
+              {{$helper.assetSymbolToLocaleNumber(getStakedDacBalance, $dir.symbol.sym)}}
             </q-item-section>
 
             <q-item-section>
@@ -87,7 +87,7 @@
             <q-item-section>{{$t(`manage_candidateship.total_votes`)}}</q-item-section>
 
             <q-item-section class="text-right">
-              {{$helper.assetSymbolToLocaleNumber(getIsCandidate.total_votes / 10000, $dir.symbol.symbol)}}
+              {{$helper.assetSymbolToLocaleNumber(getIsCandidate.total_votes / 10000, $dir.symbol.sym)}}
             </q-item-section>
 
             <!-- noop -->
@@ -140,7 +140,7 @@
               }}</span>
               <q-item>
                 <q-item-section>{{$t('manage_candidateship.current_stake')}}</q-item-section>
-                <q-item-section>{{$helper.assetSymbolToLocaleNumber(getStakedDacBalance, $dir.symbol.symbol)}}</q-item-section>
+                <q-item-section>{{$helper.assetSymbolToLocaleNumber(getStakedDacBalance, $dir.symbol.sym)}}</q-item-section>
               </q-item>
               <q-item>
                 <q-item-section side>
@@ -212,7 +212,7 @@
         <div class="row justify-between q-mt-md items-center">
           <div class="q-caption q-py-sm">
             <span class="text-positive">Your stake
-              {{$helper.assetToLocaleNumber(getStakedDacBalance + ' ' + $dir.symbol.symbol)}}
+              {{$helper.assetToLocaleNumber(getStakedDacBalance + ' ' + $dir.symbol.sym)}}
             </span>
             <span class="on-right">Release Date:
               {{
@@ -276,7 +276,7 @@ export default {
     ProfilePic
   },
   data () {
-    const [precisionStr, symbol] = this.$dir.symbol.symbol.split(',')
+    const [precisionStr, symbol] = this.$dir.symbol.sym.split(',')
     const precision = parseInt(precisionStr)
 
     return {

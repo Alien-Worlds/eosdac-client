@@ -245,7 +245,7 @@ export default {
       if (this.new_constitution_url === '' || this.md5_constitution === '') { return }
       let action = {
         account: this.$dir.symbol.contract,
-        name: 'newmemtermse', // xxxxx
+        name: 'newmemterms',
         data: {
           terms: this.new_constitution_url,
           hash: this.md5_constitution,

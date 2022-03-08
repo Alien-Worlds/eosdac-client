@@ -88,7 +88,7 @@ export default {
     'UNLOCK_INVALID_SYMBOL': 'invalid symbol name',
     'UNLOCK_NON_EXISTING_SYMBOL': 'token with symbol does not exist, create token before unlock',
     'UNSTAKE_CAND_NOT_REGISTERED': 'Candidate is not already registered.',
-    'UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND': 'Cannot unstake tokens for an active candidate. Call withdrawcand first.',
+    'UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND': 'Cannot unstake tokens for an active candidate. Call withdrawcane first.',
     'UNSTAKE_CANNOT_UNSTAKE_UNDER_TIME_LOCK': 'Cannot unstake tokens before they are unlocked from the time delay.',
     'UPDATEBIO_BIO_SIZE_TOO_LONG': 'The bio should be less than 256 characters.',
     'UPDATECONFIG_INVALID_AUTH_HIGH_TO_NUM_ELECTED': 'The auth threshold can never be satisfied with a value greater than the number of elected custodians',

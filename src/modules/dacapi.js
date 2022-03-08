@@ -110,7 +110,7 @@ export class DacApi {
   }
 
   async getTokenStats () {
-    const [, sym] = this.dir.symbol.symbol.split(',')
+    const [, sym] = this.dir.symbol.sym.split(',')
     let res = await this.eos.get_table_rows({
       json: true,
       code: this.dir.symbol.contract,
@@ -291,7 +291,7 @@ export class DacApi {
       json: true,
       code: this.dir.getAccount(this.dir.ACCOUNT_CUSTODIAN),
       scope: this.dir.dacId,
-      table: 'pendingpay2',
+      table: 'pendingpay',
       lower_bound: accountname,
       upper_bound: accountname,
       index_position: 2,

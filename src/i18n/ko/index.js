@@ -62,7 +62,7 @@ export default {
     'UNLOCK_INVALID_SYMBOL': '잘못된 심볼명',
     'UNLOCK_NON_EXISTING_SYMBOL': '해당 심볼은 가진 토큰이 존재하지 않습니다. 발행하기 전에 먼저 토큰을 생성하십시오.',
     'UNSTAKE_CAND_NOT_REGISTERED': '후보자가 아직 등록되어 있지 않습니다.',
-    'UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND': '활성화된 후보자의 토큰은 스테이크를 해제할 수 없습니다. 먼저 withdrawcand를 하십시오.',
+    'UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND': '활성화된 후보자의 토큰은 스테이크를 해제할 수 없습니다. 먼저 withdrawcane를 하십시오.',
     'UNSTAKE_CANNOT_UNSTAKE_UNDER_TIME_LOCK': '토큰이 시간 지연에서 해제되기 전에 스테이크를 해제할 수 없습니다.',
     'UPDATEBIO_BIO_SIZE_TOO_LONG': '자기소개는 256자 이하이어야합니다.',
     'UPDATECONFIG_INVALID_AUTH_HIGH_TO_NUM_ELECTED': '승인 임계 값은 선출된 관리인 수 이상의 값으로 충족시킬 수 없습니다.',

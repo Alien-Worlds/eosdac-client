@@ -173,7 +173,7 @@ export default {
       let actions = [
         {
           account: this.$dir.symbol.contract,
-          name: 'memberrege',
+          name: 'memberreg',
           data: {
             sender: this.getAccountName,
             agreedterms: this.md5_constitution,
@@ -197,7 +197,7 @@ export default {
       let actions = [
         {
           account: this.$dir.symbol.contract,
-          name: 'memberunrege',
+          name: 'memberunreg',
           data: {
             sender: this.getAccountName,
             dac_id: this.$dir.dacId

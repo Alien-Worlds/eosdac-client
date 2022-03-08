@@ -323,7 +323,7 @@ export default {
     SecondsInput
   },
   data () {
-    const [precisionStr, symbol] = this.$dir.symbol.symbol.split(',')
+    const [precisionStr, symbol] = this.$dir.symbol.sym.split(',')
     const precision = parseInt(precisionStr)
     const contract = this.$dir.symbol.contract
 
@@ -481,6 +481,7 @@ export default {
       this.custodianConfig.should_pay_via_service_provider = !!this.custodianConfig.should_pay_via_service_provider
       action.data = { newconfig: this.custodianConfig, dac_id: this.$dir.dacId }
 
+      console.info(`saveCustodianConfig action: ${JSON.stringify(action)}`)
       const res = await this.$store.dispatch('user/proposeMsig', {
         actions: [action],
         title: this.msigTitle,
@@ -493,7 +494,7 @@ export default {
 
       const action = {
         account: this.$dir.getAccount(this.$dir.ACCOUNT_PROPOSALS),
-        name: 'updateconfig',
+        name: 'updateconfige',
         authorization: [
           {
             actor: this.$dir.getAccount(this.$dir.ACCOUNT_AUTH),
@@ -515,7 +516,7 @@ export default {
 
       const action = {
         account: this.$dir.getAccount(this.$dir.ACCOUNT_REFERENDUM),
-        name: 'updateconfig',
+        name: 'updateconfige',
         authorization: [
           {
             actor: this.$dir.getAccount(this.$dir.ACCOUNT_AUTH),
@@ -546,7 +547,7 @@ export default {
         ]
       }
       // this.tokenConfig.enabled = !!this.tokenConfig.enabled
-      action.data = { config: this.tokenConfig, token_symbol: this.$dir.symbol.symbol }
+      action.data = { config: this.tokenConfig, token_symbol: this.$dir.symbol.sym }
 
       const res = await this.$store.dispatch('user/proposeMsig', {
         actions: [action],

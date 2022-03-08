@@ -187,6 +187,7 @@ export default {
     },
 
     async proposeMsig () {
+      console.log(`proposeMsig called`)
       const expiration = date.formatDate(date.addToDate(this.msig_expiration, { hours: 23, minutes: 59, seconds: 59 }), 'YYYY-MM-DDTHH:mm:ss')
       let msigOptions = {
         actions: this.actions,

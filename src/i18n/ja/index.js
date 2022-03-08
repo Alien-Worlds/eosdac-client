@@ -62,7 +62,7 @@ export default {
     'UNLOCK_INVALID_SYMBOL': '不正なシンボル名です',
     'UNLOCK_NON_EXISTING_SYMBOL': 'このシンボルのトークンは存在しません。ロックを解除する前にトークンを作成して下さい。',
     'UNSTAKE_CAND_NOT_REGISTERED': '候補者はまだ登録されていません。',
-    'UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND': 'アクティブな候補者のトークンはステークを解除できません。先にwithdrawcandを呼び出して下さい。',
+    'UNSTAKE_CANNOT_UNSTAKE_FROM_ACTIVE_CAND': 'アクティブな候補者のトークンはステークを解除できません。先にwithdrawcaneを呼び出して下さい。',
     'UNSTAKE_CANNOT_UNSTAKE_UNDER_TIME_LOCK': 'トークンが時間遅延からロック解除される前に、トークンのステークを解除することはできません。',
     'UPDATEBIO_BIO_SIZE_TOO_LONG': 'バイオグラフィーは最低で256文字必要です。',
     'UPDATECONFIG_INVALID_AUTH_HIGH_TO_NUM_ELECTED': '承認閾値を選任されたカストディアンの人数以上の値で満たすことはできません。',

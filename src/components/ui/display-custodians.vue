@@ -229,7 +229,7 @@ export default {
       let actions = [
         {
           account: this.$dir.getAccount(this.$dir.ACCOUNT_CUSTODIAN),
-          name: 'newperiode',
+          name: 'newperiod',
           data: {
             message: `New period called by ${this.getAccountName}`,
             dac_id: this.$dir.dacId
