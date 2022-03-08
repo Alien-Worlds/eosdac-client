@@ -153,7 +153,7 @@ export class DacApi {
     let scope
     let table = ''
     if (payload === 'custodian') {
-      table = 'config'
+      table = 'config2'
       contract = this.dir.getAccount(this.dir.ACCOUNT_CUSTODIAN)
       scope = this.dir.dacId
     } else if (payload === 'wp') {
