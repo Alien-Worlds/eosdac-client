@@ -377,6 +377,7 @@ export default {
     'proposed_by': 'Proposed by',
     'approve': 'Approve',
     'unapprove': 'Unapprove',
+    'deny': 'Deny',
     'cancel': 'cancel',
     'execute': 'execute',
     'resubmit': 'resubmit',
